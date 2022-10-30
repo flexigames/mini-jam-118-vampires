@@ -12,6 +12,8 @@ public class Villager : MonoBehaviour
 
     private bool isWalking = true;
 
+    public bool isSucked = false;
+
     void Start()
     {
         rigidBody = GetComponent<Rigidbody2D>();

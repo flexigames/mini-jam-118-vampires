@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class Bat : MonoBehaviour
+public class Bat : MonoBehaviour, MouseInteractable
 {
     private Rigidbody2D rigidBody;
 
@@ -33,6 +33,13 @@ public class Bat : MonoBehaviour
         }
     }
 
+    public void OnMouseClick()
+    {
+        isSucking = false;
+        Destroy(following.gameObject);
+        following = FindClosestVillager();
+    }
+
     void SuckVillager()
     {
         blood += Time.deltaTime * 10;
@@ -49,6 +56,7 @@ public class Bat : MonoBehaviour
     {
         isSucking = true;
         following.StopWalking();
+        following.isSucked = true;
         rigidBody.velocity = Vector2.zero;
     }
 
@@ -74,6 +82,8 @@ public class Bat : MonoBehaviour
         var closestDistance = float.MaxValue;
         foreach (var villager in villagers)
         {
+            if (villager.isSucked)
+                continue;
             var distance = (villager.transform.position - transform.position).magnitude;
             if (distance < closestDistance)
             {
@@ -82,14 +92,5 @@ public class Bat : MonoBehaviour
             }
         }
         return closest;
-    }
-
-    Villager FindRandomVillager()
-    {
-        var villagers = FindObjectsOfType<Villager>() as Villager[];
-        if (villagers.Length == 0)
-            return null;
-
-        return villagers[Random.Range(0, villagers.Length)];
     }
 }
