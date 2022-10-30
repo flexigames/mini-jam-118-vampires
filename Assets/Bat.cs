@@ -30,7 +30,15 @@ public class Bat : MonoBehaviour, MouseInteractable
     {
         rigidBody = GetComponent<Rigidbody2D>();
         bubbleAnimator = GetComponentInChildren<Animator>();
-        following = FindClosestVillager();
+        var target = FindVillagerTarget();
+        FollowVillager(target);
+    }
+
+    void FollowVillager(Villager villager)
+    {
+        following = villager;
+        villager.isTargeted = true;
+        state = BatState.FollowVillager;
     }
 
     void Update()
@@ -58,8 +66,7 @@ public class Bat : MonoBehaviour, MouseInteractable
         if (blood <= 0)
         {
             blood = 0;
-            state = BatState.FollowVillager;
-            following = FindClosestVillager();
+            FollowVillager(FindVillagerTarget());
             return;
         }
 
@@ -87,9 +94,12 @@ public class Bat : MonoBehaviour, MouseInteractable
 
     public void OnMouseClick()
     {
+        if (state != BatState.SuckBlood)
+            return;
+
         state = BatState.ReturnToChurch;
         Destroy(following.gameObject);
-        following = FindClosestVillager();
+        following = FindVillagerTarget();
     }
 
     void SuckVillager()
@@ -139,22 +149,24 @@ public class Bat : MonoBehaviour, MouseInteractable
         rigidBody.velocity = direction.normalized * 5;
     }
 
-    Villager FindClosestVillager()
+    Villager FindVillagerTarget()
     {
         var villagers = FindObjectsOfType<Villager>();
-        Villager closest = null;
-        var closestDistance = float.MaxValue;
+        var possibleTargets = new List<Villager>();
         foreach (var villager in villagers)
         {
-            if (villager.isSucked)
-                continue;
-            var distance = (villager.transform.position - transform.position).magnitude;
-            if (distance < closestDistance)
+            if (!villager.isTargeted)
             {
-                closest = villager;
-                closestDistance = distance;
+                possibleTargets.Add(villager);
             }
         }
-        return closest;
+
+        if (possibleTargets.Count == 0)
+        {
+            return null;
+        }
+
+        var randomIndex = Random.Range(0, possibleTargets.Count);
+        return possibleTargets[randomIndex];
     }
 }
