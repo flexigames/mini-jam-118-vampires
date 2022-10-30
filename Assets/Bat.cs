@@ -12,6 +12,7 @@ public enum BatState
 
 public class Bat : MonoBehaviour, MouseInteractable
 {
+    public float suckSpeed = 20f;
     private Rigidbody2D rigidBody;
 
     private Villager following;
@@ -22,9 +23,12 @@ public class Bat : MonoBehaviour, MouseInteractable
 
     public BatState state = BatState.FollowVillager;
 
+    private Animator bubbleAnimator;
+
     void Start()
     {
         rigidBody = GetComponent<Rigidbody2D>();
+        bubbleAnimator = GetComponentInChildren<Animator>();
         following = FindClosestVillager();
     }
 
@@ -70,13 +74,20 @@ public class Bat : MonoBehaviour, MouseInteractable
 
     void SuckVillager()
     {
-        blood += Time.deltaTime * 10;
+        blood += Time.deltaTime * suckSpeed;
         UpdateBloodText();
+        UpdateBubble();
+
         if (blood >= 100)
         {
             Destroy(gameObject);
             Destroy(following.gameObject);
         }
+    }
+
+    void UpdateBubble()
+    {
+        bubbleAnimator.Play("Bubble", 0, blood / 100f);
     }
 
     void UpdateBloodText()
