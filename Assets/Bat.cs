@@ -7,7 +7,8 @@ public enum BatState
 {
     FollowVillager,
     SuckBlood,
-    ReturnToChurch
+    ReturnToChurch,
+    DropBlood,
 }
 
 public class Bat : MonoBehaviour, MouseInteractable
@@ -46,6 +47,25 @@ public class Bat : MonoBehaviour, MouseInteractable
         {
             ReturnToChurch();
         }
+        if (state == BatState.DropBlood)
+        {
+            DropBlood();
+        }
+    }
+
+    void DropBlood()
+    {
+        if (blood <= 0)
+        {
+            blood = 0;
+            state = BatState.FollowVillager;
+            following = FindClosestVillager();
+            return;
+        }
+
+        blood -= Time.deltaTime * suckSpeed;
+        UpdateBloodText();
+        UpdateBubble();
     }
 
     void ReturnToChurch()
@@ -57,11 +77,8 @@ public class Bat : MonoBehaviour, MouseInteractable
 
         if (Vector2.Distance(transform.position, churchPosition) < 0.5f)
         {
+            state = BatState.DropBlood;
             rigidBody.velocity = Vector2.zero;
-            blood = 0;
-            UpdateBloodText();
-            state = BatState.FollowVillager;
-            following = FindClosestVillager();
         }
     }
 
