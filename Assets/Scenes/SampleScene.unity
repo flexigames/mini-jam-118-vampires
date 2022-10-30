@@ -1489,11 +1489,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6339134461621269811, guid: 9952cd950f3ca45f49c77d4bc0471492, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.5862136
+      value: 9.14
       objectReference: {fileID: 0}
     - target: {fileID: 6339134461621269811, guid: 9952cd950f3ca45f49c77d4bc0471492, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.7348394
+      value: -2.42
       objectReference: {fileID: 0}
     - target: {fileID: 6339134461621269811, guid: 9952cd950f3ca45f49c77d4bc0471492, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3819,7 +3819,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1343726585}
   - component: {fileID: 1343726584}
-  m_Layer: 0
+  - component: {fileID: 1343726586}
+  m_Layer: 7
   m_Name: church
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3893,6 +3894,22 @@ Transform:
   m_Father: {fileID: 81761984}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &1343726586
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1343726583}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 4
 --- !u!224 &1348708791 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1204025169330170510, guid: dcabf915abcfd4c6ab0792487508f429, type: 3}
@@ -5245,7 +5262,7 @@ GameObject:
   - component: {fileID: 1836114329}
   - component: {fileID: 1836114328}
   - component: {fileID: 1836114330}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5335,11 +5352,11 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -0.5, y: -0.5000722}
-  - {x: -0.4987992, y: 0.4997146}
-  - {x: 0.50129193, y: 0.50013053}
-  - {x: 0.4972831, y: -0.50289243}
-  - {x: -0.49734294, y: -0.5000721}
+  - {x: -0.4613448, y: -0.4516004}
+  - {x: -0.46311742, y: 0.42558134}
+  - {x: 0.4596632, y: 0.44880748}
+  - {x: 0.45268095, y: -0.4515694}
+  - {x: -0.45868772, y: -0.44304654}
   m_AdjacentStartPoint: {x: 0, y: 0}
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
