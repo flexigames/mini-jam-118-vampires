@@ -14,6 +14,9 @@ public enum BatState
 
 public class Bat : MonoBehaviour, MouseInteractable
 {
+    static public float flySpeed = 4f;
+
+    public float speed;
     public float suckSpeed = 20f;
     private Rigidbody2D rigidBody;
 
@@ -33,6 +36,7 @@ public class Bat : MonoBehaviour, MouseInteractable
 
     void Start()
     {
+        speed = Bat.flySpeed;
         rigidBody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         var target = FindVillagerTarget();
@@ -92,7 +96,7 @@ public class Bat : MonoBehaviour, MouseInteractable
         var church = GameObject.Find("Church");
         var churchPosition = church.transform.position;
         var direction = churchPosition - transform.position;
-        rigidBody.velocity = direction.normalized * 5f;
+        rigidBody.velocity = direction.normalized * speed;
 
         if (Vector2.Distance(transform.position, churchPosition) < 0.5f)
         {
@@ -163,7 +167,7 @@ public class Bat : MonoBehaviour, MouseInteractable
             return;
         }
 
-        rigidBody.velocity = direction.normalized * 5;
+        rigidBody.velocity = direction.normalized * speed;
     }
 
     Villager FindVillagerTarget()

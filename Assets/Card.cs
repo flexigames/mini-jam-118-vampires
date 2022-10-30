@@ -8,7 +8,8 @@ public enum CardType
 {
     BuyBat,
     WinGame,
-    SpawnVillagers
+    SpawnVillagers,
+    IncreaseBatSpeed,
 }
 
 public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
@@ -41,6 +42,19 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
             case CardType.SpawnVillagers:
                 SpawnVillagers();
                 break;
+            case CardType.IncreaseBatSpeed:
+                IncreaseBatSpeed();
+                break;
+        }
+    }
+
+    void IncreaseBatSpeed()
+    {
+        Bat.flySpeed = Bat.flySpeed * 1.5f;
+        Bat[] bats = FindObjectsOfType<Bat>();
+        foreach (Bat bat in bats)
+        {
+            bat.speed = Bat.flySpeed;
         }
     }
 
