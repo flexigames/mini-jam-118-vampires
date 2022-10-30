@@ -3,6 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+public enum BatState
+{
+    FollowVillager,
+    SuckBlood,
+    ReturnToChurch
+}
+
 public class Bat : MonoBehaviour, MouseInteractable
 {
     private Rigidbody2D rigidBody;
@@ -13,7 +20,7 @@ public class Bat : MonoBehaviour, MouseInteractable
 
     private float blood = 0;
 
-    bool isSucking = false;
+    public BatState state = BatState.FollowVillager;
 
     void Start()
     {
@@ -23,19 +30,40 @@ public class Bat : MonoBehaviour, MouseInteractable
 
     void Update()
     {
-        if (isSucking)
+        if (state == BatState.FollowVillager)
+        {
+            FollowVillager();
+        }
+        if (state == BatState.SuckBlood)
         {
             SuckVillager();
         }
-        else
+        if (state == BatState.ReturnToChurch)
         {
-            FollowVillager();
+            ReturnToChurch();
+        }
+    }
+
+    void ReturnToChurch()
+    {
+        var church = GameObject.Find("Church");
+        var churchPosition = church.transform.position;
+        var direction = churchPosition - transform.position;
+        rigidBody.velocity = direction.normalized * 5f;
+
+        if (Vector2.Distance(transform.position, churchPosition) < 0.5f)
+        {
+            rigidBody.velocity = Vector2.zero;
+            blood = 0;
+            UpdateBloodText();
+            state = BatState.FollowVillager;
+            following = FindClosestVillager();
         }
     }
 
     public void OnMouseClick()
     {
-        isSucking = false;
+        state = BatState.ReturnToChurch;
         Destroy(following.gameObject);
         following = FindClosestVillager();
     }
@@ -43,8 +71,7 @@ public class Bat : MonoBehaviour, MouseInteractable
     void SuckVillager()
     {
         blood += Time.deltaTime * 10;
-        var rounded = Mathf.RoundToInt(blood);
-        bloodText.text = rounded + "/100";
+        UpdateBloodText();
         if (blood >= 100)
         {
             Destroy(gameObject);
@@ -52,9 +79,15 @@ public class Bat : MonoBehaviour, MouseInteractable
         }
     }
 
+    void UpdateBloodText()
+    {
+        var rounded = Mathf.RoundToInt(blood);
+        bloodText.text = rounded + "/100";
+    }
+
     void StartSucking()
     {
-        isSucking = true;
+        state = BatState.SuckBlood;
         following.StopWalking();
         following.isSucked = true;
         rigidBody.velocity = Vector2.zero;
