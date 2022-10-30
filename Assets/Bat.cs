@@ -63,7 +63,10 @@ public class Bat : MonoBehaviour, MouseInteractable
             return;
         }
 
-        blood -= Time.deltaTime * suckSpeed;
+        var bloodAmount = Time.deltaTime * suckSpeed;
+        blood -= bloodAmount;
+        BloodScore.Add(bloodAmount);
+
         UpdateBloodText();
         UpdateBubble();
     }
