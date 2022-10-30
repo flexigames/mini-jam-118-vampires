@@ -54,19 +54,19 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        transform.position = new Vector3(
-            transform.position.x,
-            transform.position.y + 200f,
-            transform.position.z
+        transform.localPosition = new Vector3(
+            transform.localPosition.x,
+            transform.localPosition.y + 200f,
+            transform.localPosition.z
         );
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        transform.position = new Vector3(
-            transform.position.x,
-            transform.position.y - 200f,
-            transform.position.z
+        transform.localPosition = new Vector3(
+            transform.localPosition.x,
+            transform.localPosition.y - 200f,
+            transform.localPosition.z
         );
     }
 }
