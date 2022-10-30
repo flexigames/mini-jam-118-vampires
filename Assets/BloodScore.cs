@@ -27,6 +27,6 @@ public class BloodScore : MonoBehaviour
     void Update()
     {
         var rounded = Mathf.Floor(score);
-        scoreText.text = "blood : " + rounded + "l";
+        scoreText.text = rounded + "";
     }
 }

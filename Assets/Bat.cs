@@ -9,6 +9,7 @@ public enum BatState
     SuckBlood,
     ReturnToChurch,
     DropBlood,
+    Dead,
 }
 
 public class Bat : MonoBehaviour, MouseInteractable
@@ -26,12 +27,14 @@ public class Bat : MonoBehaviour, MouseInteractable
 
     public BatState state = BatState.FollowVillager;
 
-    private Animator bubbleAnimator;
+    public Animator bubbleAnimator;
+
+    private Animator animator;
 
     void Start()
     {
         rigidBody = GetComponent<Rigidbody2D>();
-        bubbleAnimator = GetComponentInChildren<Animator>();
+        animator = GetComponent<Animator>();
         var target = FindVillagerTarget();
         FollowVillager(target);
     }
@@ -112,10 +115,17 @@ public class Bat : MonoBehaviour, MouseInteractable
 
         if (blood >= maxBlood)
         {
-            blood = maxBlood;
-            Destroy(gameObject);
-            Destroy(following.gameObject);
+            state = BatState.Dead;
+            StartCoroutine(Die());
         }
+    }
+
+    IEnumerator Die()
+    {
+        Destroy(following.gameObject);
+        animator.SetTrigger("Die");
+        yield return new WaitForSeconds(0.5f);
+        Destroy(gameObject);
     }
 
     void UpdateBubble()
