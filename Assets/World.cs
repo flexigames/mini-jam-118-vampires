@@ -17,6 +17,7 @@ public class World : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         StartCoroutine(SpawnVillagers());
         StartCoroutine(CheckNumberOfBats());
+        Bat.flySpeed = 4f;
     }
 
     public void PlaySplash()

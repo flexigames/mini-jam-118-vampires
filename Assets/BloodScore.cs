@@ -12,6 +12,7 @@ public class BloodScore : MonoBehaviour
     void Start()
     {
         scoreText = GetComponent<TextMeshProUGUI>();
+        score = 0;
     }
 
     static public void Add(float amount)
