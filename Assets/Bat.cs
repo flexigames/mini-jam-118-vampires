@@ -132,6 +132,7 @@ public class Bat : MonoBehaviour, MouseInteractable
     {
         Destroy(following.gameObject);
         animator.SetTrigger("Die");
+        World.getWorld().PlaySplash();
         yield return new WaitForSeconds(0.5f);
         Destroy(gameObject);
     }

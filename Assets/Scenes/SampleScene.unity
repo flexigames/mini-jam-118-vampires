@@ -393,6 +393,7 @@ MonoBehaviour:
   - {fileID: 1386257379}
   - {fileID: 117934780}
   timeBetweenSpawns: 10
+  splashSound: {fileID: 8300000, guid: 1c6c164c866424910baea3c112ebbe8b, type: 3}
 --- !u!82 &81761986
 AudioSource:
   m_ObjectHideFlags: 0

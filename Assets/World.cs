@@ -8,10 +8,28 @@ public class World : MonoBehaviour
 
     public float timeBetweenSpawns = 2f;
 
+    public AudioClip splashSound;
+
+    AudioSource audioSource;
+
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         StartCoroutine(SpawnVillagers());
         StartCoroutine(CheckNumberOfBats());
+    }
+
+    public void PlaySplash()
+    {
+        if (splashSound == null)
+            return;
+
+        audioSource.PlayOneShot(splashSound);
+    }
+
+    public static World getWorld()
+    {
+        return FindObjectOfType<World>();
     }
 
     IEnumerator CheckNumberOfBats()
