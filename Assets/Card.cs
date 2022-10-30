@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using TMPro;
+using UnityEngine.UI;
 
 public enum CardType
 {
@@ -19,9 +20,12 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
 
     public TextMeshProUGUI costText;
 
+    private Image image;
+
     void Start()
     {
         costText.text = cost + "";
+        image = GetComponent<Image>();
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -45,6 +49,18 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
             case CardType.IncreaseBatSpeed:
                 IncreaseBatSpeed();
                 break;
+        }
+    }
+
+    void Update()
+    {
+        if (BloodScore.score < cost)
+        {
+            image.color = new Color(0.6f, 0.6f, 0.6f, 1f);
+        }
+        else
+        {
+            image.color = Color.white;
         }
     }
 
