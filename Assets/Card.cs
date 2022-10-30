@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using TMPro;
 
 public enum CardType
 {
@@ -12,6 +13,13 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
 {
     public int cost;
     public CardType type;
+
+    public TextMeshProUGUI costText;
+
+    void Start()
+    {
+        costText.text = cost + "";
+    }
 
     public void OnPointerClick(PointerEventData eventData)
     {
