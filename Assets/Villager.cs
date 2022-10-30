@@ -16,9 +16,13 @@ public class Villager : MonoBehaviour
 
     public bool isTargeted = false;
 
+    private Animator animator;
+
     void Start()
     {
         rigidBody = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+        animator.SetFloat("Offset", Random.Range(0f, 1f));
     }
 
     void Update()
