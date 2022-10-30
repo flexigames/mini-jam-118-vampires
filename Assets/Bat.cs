@@ -22,6 +22,8 @@ public class Bat : MonoBehaviour, MouseInteractable
 
     private float blood = 0;
 
+    private float maxBlood = 10;
+
     public BatState state = BatState.FollowVillager;
 
     private Animator bubbleAnimator;
@@ -108,8 +110,9 @@ public class Bat : MonoBehaviour, MouseInteractable
         UpdateBloodText();
         UpdateBubble();
 
-        if (blood >= 100)
+        if (blood >= maxBlood)
         {
+            blood = maxBlood;
             Destroy(gameObject);
             Destroy(following.gameObject);
         }
@@ -117,13 +120,13 @@ public class Bat : MonoBehaviour, MouseInteractable
 
     void UpdateBubble()
     {
-        bubbleAnimator.Play("Bubble", 0, blood / 100f);
+        bubbleAnimator.Play("Bubble", 0, blood / maxBlood);
     }
 
     void UpdateBloodText()
     {
         var rounded = Mathf.RoundToInt(blood);
-        bloodText.text = rounded + "/100";
+        bloodText.text = rounded + "/" + maxBlood;
     }
 
     void StartSucking()

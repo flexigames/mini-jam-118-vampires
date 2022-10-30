@@ -19,9 +19,14 @@ public class BloodScore : MonoBehaviour
         score += amount;
     }
 
+    static public void Sub(float amount)
+    {
+        score -= amount;
+    }
+
     void Update()
     {
-        var rounded = Mathf.Round(score);
+        var rounded = Mathf.Floor(score);
         scoreText.text = "blood : " + rounded + "l";
     }
 }

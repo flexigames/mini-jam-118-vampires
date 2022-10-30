@@ -484,7 +484,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2eb292763d044d7685fdb13e25b6667, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  suckSpeed: 20
+  suckSpeed: 2
   bloodText: {fileID: 8592471496990067589}
   state: 0
 --- !u!50 &8592471498132662047
