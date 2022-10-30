@@ -7,6 +7,7 @@ using TMPro;
 public enum CardType
 {
     BuyBat,
+    WinGame
 }
 
 public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
@@ -33,6 +34,9 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
             case CardType.BuyBat:
                 BuyBat();
                 break;
+            case CardType.WinGame:
+                WinGame();
+                break;
         }
     }
 
@@ -41,6 +45,11 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
         var bat = Instantiate(Resources.Load("Bat")) as GameObject;
         var church = GameObject.Find("Church");
         bat.transform.position = church.transform.position;
+    }
+
+    void WinGame()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene("WinScene");
     }
 
     public void OnPointerEnter(PointerEventData eventData)
