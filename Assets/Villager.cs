@@ -10,12 +10,20 @@ public class Villager : MonoBehaviour
 
     private Rigidbody2D rigidBody;
 
+    private bool isWalking = true;
+
     void Start()
     {
         rigidBody = GetComponent<Rigidbody2D>();
     }
 
     void Update()
+    {
+        if (isWalking)
+            Walk();
+    }
+
+    void Walk()
     {
         if (timeLeft <= 0f)
         {
@@ -25,5 +33,16 @@ public class Villager : MonoBehaviour
 
         timeLeft -= Time.deltaTime;
         rigidBody.velocity = direction;
+    }
+
+    public void StopWalking()
+    {
+        isWalking = false;
+        rigidBody.velocity = Vector2.zero;
+    }
+
+    void StartWalking()
+    {
+        isWalking = true;
     }
 }
