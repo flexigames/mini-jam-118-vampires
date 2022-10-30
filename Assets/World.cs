@@ -11,6 +11,21 @@ public class World : MonoBehaviour
     void Start()
     {
         StartCoroutine(SpawnVillagers());
+        StartCoroutine(CheckNumberOfBats());
+    }
+
+    IEnumerator CheckNumberOfBats()
+    {
+        while (true)
+        {
+            var bat = FindObjectOfType<Bat>();
+            if (bat == null)
+            {
+                yield return new WaitForSeconds(1f);
+                UnityEngine.SceneManagement.SceneManager.LoadScene("GameOver");
+            }
+            yield return new WaitForSeconds(0.5f);
+        }
     }
 
     public void ReduceTimeBetweenSpawn()
