@@ -7,7 +7,8 @@ using TMPro;
 public enum CardType
 {
     BuyBat,
-    WinGame
+    WinGame,
+    SpawnVillagers
 }
 
 public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
@@ -37,7 +38,16 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
             case CardType.WinGame:
                 WinGame();
                 break;
+            case CardType.SpawnVillagers:
+                SpawnVillagers();
+                break;
         }
+    }
+
+    void SpawnVillagers()
+    {
+        var world = FindObjectOfType<World>();
+        world.ReduceTimeBetweenSpawn();
     }
 
     void BuyBat()

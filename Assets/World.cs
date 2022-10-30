@@ -13,6 +13,11 @@ public class World : MonoBehaviour
         StartCoroutine(SpawnVillagers());
     }
 
+    public void ReduceTimeBetweenSpawn()
+    {
+        timeBetweenSpawns = 0.8f * timeBetweenSpawns;
+    }
+
     IEnumerator SpawnVillagers()
     {
         while (true)
