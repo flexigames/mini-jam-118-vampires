@@ -71,7 +71,11 @@ public class Bat : MonoBehaviour, MouseInteractable
         if (blood <= 0)
         {
             blood = 0;
-            FollowVillager(FindVillagerTarget());
+            var newTarget = FindVillagerTarget();
+            if (newTarget != null)
+            {
+                FollowVillager(newTarget);
+            }
             return;
         }
 
