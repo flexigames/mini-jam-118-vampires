@@ -327,7 +327,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2eb292763d044d7685fdb13e25b6667, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  suckSpeed: 2
+  speed: 0
+  suckSpeed: 1.2
   bloodText: {fileID: 8592471496990067589}
   state: 0
   bubbleAnimator: {fileID: 8592471497319328593}

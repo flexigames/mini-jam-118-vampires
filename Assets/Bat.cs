@@ -158,6 +158,16 @@ public class Bat : MonoBehaviour, MouseInteractable
 
     void FollowVillager()
     {
+        if (following == null)
+        {
+            var newTarget = FindVillagerTarget();
+            if (newTarget != null)
+            {
+                FollowVillager(newTarget);
+            }
+            return;
+        }
+
         var villagerPosition = following.transform.position;
         var direction = villagerPosition - transform.position;
 
