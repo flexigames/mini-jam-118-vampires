@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class Screen : MonoBehaviour
 {
+    public string nextScene = "SampleScene";
+
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
-            UnityEngine.SceneManagement.SceneManager.LoadScene("SampleScene");
+            UnityEngine.SceneManagement.SceneManager.LoadScene(nextScene);
         }
     }
 }
